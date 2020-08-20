@@ -10,7 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import {ImagesReducer} from './store/images/images.reducer'
 import { EffectsModule } from '@ngrx/effects';
-import { ImagesEffects } from './store/images/images.effects';
+import { ImageEffects } from './store/images/images.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,7 @@ import { ImagesEffects } from './store/images/images.effects';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({images : ImagesReducer}),
-    EffectsModule.forRoot([ImagesEffects])
+    EffectsModule.forRoot([ImageEffects])
    ],
   providers: [],
   bootstrap: [AppComponent]

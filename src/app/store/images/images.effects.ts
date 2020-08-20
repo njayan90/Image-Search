@@ -1,19 +1,44 @@
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { DataService } from 'src/app/services/data.service';
-import { getImages, ImageLoadSuccess } from './images.actions';
-import {switchMap, map, catchError, tap} from 'rxjs/operators'
-import { EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import * as ImageActions from './images.actions';
+import { DataService } from 'src/app/services/data.service';
 
 @Injectable()
-export class ImagesEffects{
+export class ImageEffects {
+  constructor(private dataService: DataService, private action$: Actions) {}
 
-    constructor(private actions$ : Actions , private dataService : DataService){
+  getImages$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(ImageActions.BeginGetImages),
+      mergeMap(action =>
+        this.dataService.fetchData().pipe(
+          map((data: []) => {
+            return ImageActions.SuccessGetImages({ payload: data });
+          }),
+          catchError((error: Error) => {
+            return of(ImageActions.ErrorGetImages(error));
+          })
+        )
+      )
+    )
+  );
 
-    }
-    loadImages$ = createEffect(() => this.actions$.pipe(
-        ofType(ImageLoadSuccess) ,
-        switchMap(() => this.dataService.fetchData().pipe(tap(resp=>console.log(resp)),
-            map((images : any) => ImageLoadSuccess({images})) , 
-            catchError(() => EMPTY)))))
+  searchImage$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(ImageActions.BeginSearchImages),
+      mergeMap(action =>
+        this.dataService.searchData(action.payload).pipe(
+          map((data: any) => {
+            return ImageActions.SuccessGetImages({ payload: data.results });
+          }),
+          catchError((error: Error) => {
+            return of(ImageActions.ErrorGetImages(error));
+          })
+        )
+      )
+    )
+  );
 }

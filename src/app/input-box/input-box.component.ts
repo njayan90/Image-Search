@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
+import {Store} from '@ngrx/store';
+import { BeginSearchImages } from '../store/images/images.actions';
 
 @Component({
   selector: 'app-input-box',
@@ -8,15 +10,13 @@ import { DataService } from '../services/data.service';
 })
 export class InputBoxComponent implements OnInit {
 
-  constructor(private dataService : DataService) { }
+  constructor(private dataService : DataService , private store : Store<{images: any}>) { }
 
   ngOnInit() {
   }
 
   searchImage(searchWord){
-    this.dataService.searchData(searchWord).subscribe(data => {
-      this.dataService.search.next(data);
-    })
+    this.store.dispatch(BeginSearchImages({payload : searchWord}));
   }
 
 }

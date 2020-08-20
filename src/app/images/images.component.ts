@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import {Store} from '@ngrx/store';
-import { getImages } from '../store/images/images.actions';
+import { BeginGetImages } from '../store/images/images.actions';
 
 @Component({
   selector: 'app-images',
@@ -10,20 +10,14 @@ import { getImages } from '../store/images/images.actions';
 })
 export class ImagesComponent implements OnInit {
   imageData : any;
-  constructor(private dataService : DataService , private store : Store<{images : any[]}>) { }
+  constructor(private dataService : DataService , private store : Store<{images: any}>) {} 
 
   ngOnInit() {
-    this.store.dispatch(getImages());
-    this.store.select(state => state).subscribe(resp => {
+   this.store.dispatch(BeginGetImages());
+   this.store.select(state => state).subscribe(resp => {
+      this.imageData = resp.images.images
       console.log(resp)
-      this.imageData = resp.images
     });
-    // this.dataService.fetchData().subscribe(data => {
-    //   this.imageData = data
-    // })
-    // this.dataService.search.subscribe((data:any) => {
-    //   this.imageData = data.results
-    // })
   }
 
 }

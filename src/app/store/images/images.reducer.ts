@@ -1,7 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ImageActions from './images.actions';
 
-const initialState = [];
+const initialState = {
+  favourites : [],
+  images : []
+};
 
 const reducer = createReducer(
   initialState,

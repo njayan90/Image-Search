@@ -11,12 +11,14 @@ import { StoreModule } from '@ngrx/store';
 import {ImagesReducer} from './store/images/images.reducer'
 import { EffectsModule } from '@ngrx/effects';
 import { ImageEffects } from './store/images/images.effects';
+import { FavouritesComponent } from './favourites/favourites.component';
 @NgModule({
   declarations: [
     AppComponent,
     InputBoxComponent,
     ImagesComponent,
-    ImageComponent
+    ImageComponent,
+    FavouritesComponent
   ],
   imports: [
     BrowserModule,

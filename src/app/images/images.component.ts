@@ -10,7 +10,7 @@ import { BeginGetImages } from '../store/images/images.actions';
 })
 export class ImagesComponent implements OnInit {
   imageData : any;
-  constructor(private dataService : DataService , private store : Store<{images: any}>) {} 
+  constructor(private store : Store<{images: {images : []}}>) {} 
 
   ngOnInit() {
    this.store.dispatch(BeginGetImages());

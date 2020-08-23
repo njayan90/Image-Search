@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
 import {Store} from '@ngrx/store';
 import { BeginGetImages } from '../store/images/images.actions';
 
@@ -16,7 +15,6 @@ export class ImagesComponent implements OnInit {
    this.store.dispatch(BeginGetImages());
    this.store.select(state => state).subscribe(resp => {
       this.imageData = resp.images.images
-      console.log(resp)
     });
   }
 

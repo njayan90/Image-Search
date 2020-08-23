@@ -16,8 +16,11 @@ const reducer = createReducer(
   on(ImageActions.SuccessSearchImages, (state: any, { payload }) => {
     return { ...state, images: payload, error: null };
   }),
+  on(ImageActions.AddToFavourites, (state : any , {payload}) => {
+    return {...state , favourites : [...state.favourites , payload] , error : null}
+  }),
+  on(ImageActions.GetFavourites , state => state)
 );
-
 export function ImagesReducer(
   state: [] | undefined,
   action: Action

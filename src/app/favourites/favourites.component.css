@@ -1,0 +1,7 @@
+.card{
+    cursor: pointer;
+}
+.card-img-top{
+    min-height: 10em;
+    max-height: 10em;
+}

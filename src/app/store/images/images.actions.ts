@@ -14,7 +14,7 @@ export const SuccessSearchImages = createAction(
   '[Input Component] - Success Search Images',
   props<{ payload: [] }>()
 );
-
-export const AddToFavourites = createAction('[Favourites Component] - Add to Favourites' , props<{payload : {}}>());
+export const AddListName = createAction('[Favourites Component] - Add to Favourites' , props<{payload : string}>())
+export const AddToFavourites = createAction('[Favourites Component] - Add to Favourites' , props<{payload : {listName : string , imageData : {}}}>());
 export const GetFavourites = createAction('[Favourites Component] - Get Favourites');
 export const ErrorGetImages = createAction('[Images Component] - Error', props<Error>());

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
-import { BeginGetImages } from '../store/images/images.actions';
+import { BeginGetImages, AddToFavourites } from '../store/images/images.actions';
 
 @Component({
   selector: 'app-images',
@@ -9,6 +9,8 @@ import { BeginGetImages } from '../store/images/images.actions';
 })
 export class ImagesComponent implements OnInit {
   imageData : any;
+  selectedImage : {} = {};
+  listName : string = '';
   constructor(private store : Store<{images: {images : []}}>) {} 
 
   ngOnInit() {
@@ -17,5 +19,15 @@ export class ImagesComponent implements OnInit {
       this.imageData = resp.images.images
     });
   }
-
+ 
+  setData(data){
+    this.selectedImage = data;
+    console.log(this.selectedImage)
+  }
+  addToFavourites(){
+    console.log(this.selectedImage)
+     if(this.listName!== ''){
+     this.store.dispatch(AddToFavourites({payload : {listName : this.listName , imageData : this.selectedImage}}));
+    }
+  }
 }

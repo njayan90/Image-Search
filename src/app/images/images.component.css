@@ -1,0 +1,19 @@
+.card{
+    cursor: pointer;
+}
+.card-img-top{
+    min-height: 10em;
+    max-height: 10em;
+}
+
+.card-img-overlay>a{
+    color: #ffffff;
+    font-weight: 1000;
+}
+.card-img-overlay>a , .card-img-overlay>button{
+    visibility: hidden;
+}
+
+.card-img-overlay:hover a , .card-img-overlay:hover button{
+   visibility: visible;
+}

@@ -27,7 +27,7 @@ export class ImagesComponent implements OnInit {
   addToFavourites(){
     console.log(this.selectedImage)
      if(this.listName!== ''){
-     this.store.dispatch(AddToFavourites({payload : {listName : this.listName , imageData : this.selectedImage}}));
+     this.store.dispatch(AddToFavourites({payload : {listName : this.listName.toLowerCase() , imageData : this.selectedImage}}));
     }
   }
 }
